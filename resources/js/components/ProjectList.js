@@ -84,7 +84,7 @@ class ProjectList extends Component {
                                                     <div className="card-image">
                                                         <figure className="image is-4by3">
                                                             <img
-                                                                alt={'http://127.0.0.1:8001/assets/images/download.jpeg'}
+                                                                alt={'/assets/images/download.jpeg'}
                                                                 src={productData.cover}></img>
                                                         </figure>
                                                     </div>
