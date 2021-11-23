@@ -2288,7 +2288,7 @@ var Product = /*#__PURE__*/function (_Component) {
               case 0:
                 url = window.location.href;
                 id = url.split("/").pop();
-                enpoint = "http://127.0.0.1:8002/" + 'api/product/' + id;
+                enpoint = "http://127.0.0.1:8000/" + 'api/product/' + id;
                 _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().get(enpoint).then(function (response) {
                   if (response.data.status) {
@@ -2303,8 +2303,6 @@ var Product = /*#__PURE__*/function (_Component) {
                       status: true
                     });
                   } else {
-                    console.log('dddd');
-
                     _this2.setState({
                       showSpinner: false,
                       small: '',
@@ -2611,7 +2609,7 @@ var ProjectList = /*#__PURE__*/function (_Component) {
                     limit: limit
                   }
                 };
-                url = "http://127.0.0.1:8002/" + 'api/products';
+                url = "http://127.0.0.1:8000/" + 'api/products';
                 _context.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, config).then(function (response) {
                   _this2.setState({
@@ -2642,67 +2640,71 @@ var ProjectList = /*#__PURE__*/function (_Component) {
           projects = _this$state.projects,
           showSpinner = _this$state.showSpinner;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "container",
-          children: showSpinner ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            id: "preloader",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "preloader_div"
-            })
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "row",
-              children: projects.length > 0 ? projects.map(function (productData, productKey) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                  className: "card col-md-3",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                    className: "card-image",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("figure", {
-                      className: "image is-4by3",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                        alt: 'http://127.0.0.1:8001/assets/images/download.jpeg',
-                        src: productData.cover
-                      })
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("section", {
+          className: "product-outer",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "container",
+            children: showSpinner ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              id: "preloader",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "preloader_div"
+              })
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "row",
+                children: projects.length > 0 ? projects.map(function (productData, productKey) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                    className: "col-md-3 product-item",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                      className: "card",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                        className: "card-image",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("figure", {
+                          className: "image is-4by3",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                            alt: '/assets/images/download.jpeg',
+                            src: productData.cover
+                          })
+                        })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                        className: "card-content",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                          className: "title product-title",
+                          children: productData.title
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                          className: "button is-primary btn btn-success mb-2",
+                          href: 'product/' + productData.id,
+                          children: "More Details"
+                        })]
+                      })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                    className: "card-content",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                      className: "title product-title",
-                      children: productData.title
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                      className: "content",
-                      children: [productData.caption, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {})]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-                      className: "button is-primary",
-                      href: 'product/' + productData.id,
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
-                        children: "More Details"
-                      })
-                    })]
-                  })]
-                }, productData.id);
-              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                children: "No Products found"
+                  }, productData.id);
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                  children: "No Products found"
+                })
               })
             })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "row pagination-block",
+          className: "container",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "col-md-12",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((react_paginate__WEBPACK_IMPORTED_MODULE_3___default()), {
-              previousLabel: "prev",
-              nextLabel: "next",
-              breakLabel: "...",
-              breakClassName: "break-me",
-              pageCount: this.state.pageCount,
-              marginPagesDisplayed: 2,
-              pageRangeDisplayed: 3,
-              disableInitialCallback: true,
-              onPageChange: this.handlePageClick,
-              containerClassName: "pagination",
-              subContainerClassName: "pages pagination",
-              activeClassName: "active"
+            className: "row pagination-block",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "col-md-12",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((react_paginate__WEBPACK_IMPORTED_MODULE_3___default()), {
+                previousLabel: "prev",
+                nextLabel: "next",
+                breakLabel: "...",
+                breakClassName: "break-me",
+                pageCount: this.state.pageCount,
+                marginPagesDisplayed: 2,
+                pageRangeDisplayed: 3,
+                disableInitialCallback: true,
+                onPageChange: this.handlePageClick,
+                containerClassName: "pagination",
+                subContainerClassName: "pages pagination",
+                activeClassName: "active"
+              })
             })
           })
         })]

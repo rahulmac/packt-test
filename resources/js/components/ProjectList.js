@@ -65,7 +65,7 @@ class ProjectList extends Component {
         const {projects, showSpinner} = this.state
         return (
             <>
-
+                <section className={"product-outer"}>
                 <div className={"container"}>
                     {
                         (showSpinner) ?
@@ -80,7 +80,8 @@ class ProjectList extends Component {
                                             ?
                                             projects.map((productData, productKey) => (
 
-                                                <div className="card col-md-3" key={productData.id}>
+                                                <div className="col-md-3 product-item" key={productData.id}>
+                                                    <div className={"card"}>
                                                     <div className="card-image">
                                                         <figure className="image is-4by3">
                                                             <img
@@ -90,16 +91,14 @@ class ProjectList extends Component {
                                                     </div>
                                                     <div className="card-content">
                                                         <p className="title product-title">{productData.title}</p>
-                                                        <div className="content">
-                                                            {productData.caption}
-                                                            <br></br>
-                                                        </div>
-                                                        <a className="button is-primary"
+
+                                                        <a className="button is-primary btn btn-success mb-2"
                                                            href={'product/' + productData.id}
                                                         >
-                                                            <strong>More Details</strong>
+                                                            More Details
                                                         </a>
                                                     </div>
+                                                </div>
                                                 </div>
                                             ))
 
@@ -112,6 +111,8 @@ class ProjectList extends Component {
 
                     }
                 </div>
+                </section>
+                <div className={"container"}>
                 <div className={"row pagination-block"}>
                     <div className={"col-md-12"}>
                         <ReactPaginate previousLabel={"prev"}
@@ -127,6 +128,7 @@ class ProjectList extends Component {
                                        subContainerClassName={"pages pagination"}
                                        activeClassName={"active"}/>
                     </div>
+                </div>
                 </div>
 
             </>
