@@ -12,5 +12,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Route::get('/products-view', 'App\Http\Controllers\ProductController@index');
 Route::view('{path}', 'app')->where('path', '([A-z\d\-\/_.]+)?');
