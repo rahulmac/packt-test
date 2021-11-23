@@ -13,9 +13,6 @@
     MIX_APP_URL= this needs to be the url of laravel project
     
     
-## PENDING ITEMS
-- need to work on pagiantion design fixes and few layout fixes as well
-
 
 ## Frontend - REACT
 ## Backend - Laravel
