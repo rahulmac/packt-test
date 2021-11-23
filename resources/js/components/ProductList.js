@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, {Component} from 'react'
 import ReactPaginate from 'react-paginate'
 
-class ProjectList extends Component {
+class ProductList extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -138,4 +138,4 @@ class ProjectList extends Component {
     }
 }
 
-export default ProjectList
+export default ProductList

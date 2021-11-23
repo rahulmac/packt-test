@@ -2,8 +2,8 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Services\ProductService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 /**
  * Class ProductsController
@@ -28,29 +28,19 @@ class ProductsController extends ApiBaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProducts(Request $request)
+    public function getProducts(Request $request, ProductService $productService)
     {
         $page = $request->input('page'); //page number to get particular product listing page
         $limit = $request->input('limit'); // limit number of products per page
 
-        $token = $this->token; // packt token
-
         $endpoint = $this->endpoint . 'products';
-        //create endpoint url to make curl call
-        $url = $endpoint . '?page=' . $page . '&&limit=' . $limit . '&&token=' . $token;
 
         try {
             //curl call
-            $products = Http::get($url);
-
-            if ($products->failed()) {
-                return response()->json([
-                    'status' => 'failure',
-                    'data' => []
-                ], 200);
-            } else {
-                //read reesponse from curl call and retrive needed information and create array
-                $responseBody = json_decode($products->body(), true);
+            $products = $productService->getProducts($page, $limit);
+            if ($products['status']) {
+                $data = $products['products'];
+                $responseBody = json_decode($data->body(), true);
                 $lastPage = $responseBody['last_page'];
                 $products = $responseBody['products'];
 
@@ -63,19 +53,15 @@ class ProductsController extends ApiBaseController
                     $productListing[] = $item;
                 }
                 return response()->json([
-                    'status' => 'success',
+                    'status' => true,
                     'data' => $productListing,
                     'pageCount' => count($productListing) > 0 ? $lastPage : 0
                 ], 200);
+            } else {
+                return response()->json($products);
             }
         } catch (\Exception $e) {
-            // send error exception from here
-
-            return response()->json([
-                'status' => 'error',
-                'data' => [],
-                'error' => $e->getMessage()
-            ], 200);
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
         }
     }
 
@@ -84,30 +70,23 @@ class ProductsController extends ApiBaseController
      * @param $productID
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProduct($productID)
+    public function getProduct($productID, ProductService $productService)
     {
-        //endpoint to fetch product details
-        $endpoint = $this->endpoint . 'products/' . $productID . '?token=' . $this->token;
-
         try {
-            //curl / http call
-            $products = Http::get($endpoint);
 
-            if ($products->failed()) {
-                return response()->json([
-                    'status' => false,
-                    'data' => []
-                ], 200);
-            } else {
-                //retrive and use product details 
-                $responseBody = [];
-                $responseBody = json_decode($products->body(), true);
+            $product = $productService->getProduct($productID);
+
+            if ($product['status']) {
+                $data = $product['product'];
+                $responseBody = json_decode($data->body(), true);
 
                 $status = count($responseBody) > 0 ? true : false;
                 return response()->json([
                     'status' => $status,
                     'data' => $responseBody,
                 ], 200);
+            } else {
+                return response()->json($product);
             }
         } catch (\Exception $e) {
             // send error exception from here

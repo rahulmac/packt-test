@@ -2133,7 +2133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var _ProjectList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectList */ "./resources/js/components/ProjectList.js");
+/* harmony import */ var _ProductList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProductList */ "./resources/js/components/ProductList.js");
 /* harmony import */ var _Product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Product */ "./resources/js/components/Product.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2185,7 +2185,7 @@ var App = /*#__PURE__*/function (_Component) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
             path: "/",
             caseSensitive: false,
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ProjectList__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ProductList__WEBPACK_IMPORTED_MODULE_2__["default"], {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
             path: "/product/:id",
             caseSensitive: false,
@@ -2486,9 +2486,9 @@ var Product = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/ProjectList.js":
+/***/ "./resources/js/components/ProductList.js":
 /*!************************************************!*\
-  !*** ./resources/js/components/ProjectList.js ***!
+  !*** ./resources/js/components/ProductList.js ***!
   \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2542,15 +2542,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var ProjectList = /*#__PURE__*/function (_Component) {
-  _inherits(ProjectList, _Component);
+var ProductList = /*#__PURE__*/function (_Component) {
+  _inherits(ProductList, _Component);
 
-  var _super = _createSuper(ProjectList);
+  var _super = _createSuper(ProductList);
 
-  function ProjectList(props) {
+  function ProductList(props) {
     var _this;
 
-    _classCallCheck(this, ProjectList);
+    _classCallCheck(this, ProductList);
 
     _this = _super.call(this, props);
 
@@ -2572,7 +2572,7 @@ var ProjectList = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(ProjectList, [{
+  _createClass(ProductList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getData(this.state.page);
@@ -2712,10 +2712,10 @@ var ProjectList = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return ProjectList;
+  return ProductList;
 }(react__WEBPACK_IMPORTED_MODULE_2__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductList);
 
 /***/ }),
 

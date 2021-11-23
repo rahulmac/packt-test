@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ProjectList from './ProjectList'
+import ProductList from './ProductList'
 import Product from "./Product";
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
         return (
             <Router>
                 <Routes>
-                    <Route path="/" caseSensitive={false} element={<ProjectList />} />
+                    <Route path="/" caseSensitive={false} element={<ProductList />} />
                     <Route path="/product/:id" caseSensitive={false} element={<Product />} />
                 </Routes>
             </Router>
