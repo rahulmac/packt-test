@@ -16,3 +16,12 @@
 
 ## Frontend - REACT
 ## Backend - Laravel
+
+
+## Product Listing Page
+![Product-Listing](https://user-images.githubusercontent.com/22441472/142996403-0dc3d117-79e9-40ae-87da-b165519c758f.png)
+
+
+## Product Details Page
+
+![Product-Details](https://user-images.githubusercontent.com/22441472/142996448-535d8f6f-7a1c-4063-970f-48e42812c7a1.png)
