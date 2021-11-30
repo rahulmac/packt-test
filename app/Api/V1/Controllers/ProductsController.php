@@ -26,6 +26,7 @@ class ProductsController extends ApiBaseController
     /**
      * This function will return products listing
      * @param Request $request
+     * @param ProductService $productService
      * @return \Illuminate\Http\JsonResponse
      */
     public function getProducts(Request $request, ProductService $productService)
@@ -68,6 +69,7 @@ class ProductsController extends ApiBaseController
     /**
      * This function will take productID and return details of that product
      * @param $productID
+     * @param ProductService $productService
      * @return \Illuminate\Http\JsonResponse
      */
     public function getProduct($productID, ProductService $productService)

@@ -63,7 +63,7 @@ class Product extends Component {
                             <div className="row product-details">
 
                                 <div className="col-md-6 img-div">
-                                    <img src={small + '?token=rrd0wATTLPfAHX9pqbqT4XUIx729VZI21w0iuWG1'} alt=""/>
+                                    <img src={small + '?token='+process.env.MIX_API_TOKEN} alt=""/>
 
                                 </div>
                                 <div className="col-md-6">
