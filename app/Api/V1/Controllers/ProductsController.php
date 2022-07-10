@@ -2,6 +2,11 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Http\Resources\Product;
+use App\Http\Resources\Products;
+use App\Http\Responses\Product\FailureResponse;
+use App\Http\Responses\Product\SuccessResponse;
+use App\Http\Validators\ProductValidator;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -11,58 +16,26 @@ use Illuminate\Http\Request;
  */
 class ProductsController extends ApiBaseController
 {
-    protected $token;
-    protected $endpoint;
 
     /**
-     * ProductsController constructor.
-     */
-    public function __construct()
-    {
-        $this->token = env('MIX_API_TOKEN');
-        $this->endpoint = env('MIX_PACKET_API');
-    }
-
-    /**
-     * This function will return products listing
      * @param Request $request
      * @param ProductService $productService
+     * @param ProductValidator $productValidator
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getProducts(Request $request, ProductService $productService)
+    public function getProducts(Request $request, ProductService $productService, ProductValidator $productValidator)
     {
-        $page = $request->input('page'); //page number to get particular product listing page
-        $limit = $request->input('limit'); // limit number of products per page
 
-        $endpoint = $this->endpoint . 'products';
-
+        $validateRequest = $productValidator->setRequest($request)->setFromRequest()->validateRequest();
+        if (is_array($validateRequest)) {
+            return FailureResponse::handleValidation($validateRequest);
+        }
         try {
-            //curl call
-            $products = $productService->getProducts($page, $limit);
-            if ($products['status']) {
-                $data = $products['products'];
-                $responseBody = json_decode($data->body(), true);
-                $lastPage = $responseBody['last_page'];
-                $products = $responseBody['products'];
+            return  SuccessResponse::response(Products::make($productService->getProducts($productValidator))->resolve());
 
-                $productListing = [];
-                foreach ($products as $product) {
-                    $item['title'] = $product['title'];
-                    $item['concept'] = $product['concept'];
-                    $item['cover'] = $endpoint . '/' . $product['id'] . '/cover/small?token=' . $this->token;
-                    $item['id'] = $product['id'];
-                    $productListing[] = $item;
-                }
-                return response()->json([
-                    'status' => true,
-                    'data' => $productListing,
-                    'pageCount' => count($productListing) > 0 ? $lastPage : 0
-                ], 200);
-            } else {
-                return response()->json($products);
-            }
         } catch (\Exception $e) {
-            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+            return FailureResponse::handleException($e->getMessage());
         }
     }
 
@@ -75,29 +48,9 @@ class ProductsController extends ApiBaseController
     public function getProduct($productID, ProductService $productService)
     {
         try {
-
-            $product = $productService->getProduct($productID);
-
-            if ($product['status']) {
-                $data = $product['product'];
-                $responseBody = json_decode($data->body(), true);
-
-                $status = count($responseBody) > 0 ? true : false;
-                return response()->json([
-                    'status' => $status,
-                    'data' => $responseBody,
-                ], 200);
-            } else {
-                return response()->json($product);
-            }
+           return SuccessResponse::response(Product::make($productService->getProduct($productID))->resolve());
         } catch (\Exception $e) {
-            // send error exception from here
-
-            return response()->json([
-                'status' => 'error',
-                'data' => [],
-                'error' => $e->getMessage()
-            ], 200);
+            return FailureResponse::handleException($e->getMessage());
         }
     }
 }

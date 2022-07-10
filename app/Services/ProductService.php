@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Validators\ProductValidator;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -12,17 +13,6 @@ use Illuminate\Support\Facades\Http;
  */
 class ProductService
 {
-    protected $token;
-    protected $endpoint;
-
-    /**
-     * ProductService constructor.
-     */
-    public function __construct()
-    {
-        $this->token = env('MIX_API_TOKEN');
-        $this->endpoint = env('MIX_PACKET_API');
-    }
 
     /**
      * service method that takes page no and limit and returns product listing accrodingly
@@ -30,15 +20,15 @@ class ProductService
      * @param int $limit
      * @return array
      */
-    public function getProducts($page = 1, $limit = 8)
+    public function getProducts(ProductValidator $productValidator)
     {
 
 
-        $token = $this->token; // packt token
+        $token = config('app.token'); // packt token
 
-        $endpoint = $this->endpoint . 'products';
+        $endpoint = config('app.endpoint') . 'products';
         //create endpoint url to make curl call
-        $url = $endpoint . '?page=' . $page . '&&limit=' . $limit . '&&token=' . $token;
+        $url = $endpoint . '?page=' . $productValidator->getPage() . '&&limit=' . $productValidator->getLimit() . '&&token=' . $token;
 
         try {
             //curl call
@@ -58,14 +48,13 @@ class ProductService
     }
 
     /**
-     * service function that will return product details using productID
-     * @param $productID
+     * @param string $productID
      * @return array
      */
-    public function getProduct($productID)
+    public function getProduct(string $productID)
     {
 
-        $endpoint = $this->endpoint . 'products/' . $productID . '?token=' . $this->token;
+        $endpoint = config('app.endpoint') . 'products/' . $productID . '?token=' . config('app.token');
 
         try {
             //curl / http call

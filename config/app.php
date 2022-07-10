@@ -231,5 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    'token'=> env('MIX_API_TOKEN'),
+    'endpoint'=>env('MIX_PACKET_API')
 
 ];
